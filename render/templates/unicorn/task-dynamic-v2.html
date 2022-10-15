@@ -1,0 +1,43 @@
+{% load static %}
+{% load unicorn %}
+{% load i18n %}
+<div>
+  <link rel="stylesheet" href="{% static 'css/style_messages_error.css' %}">
+  {% unicorn_errors %}
+  <p id="erro_mensagem"></p>
+  <button unicorn:click="adicionar_3_tasks_aleatorias" id="btn_adicionar_3_tasks_aleatorias" type="button" class="btn btn-primary">Adicionar 3 tasks aleatorias</button>
+  <button unicorn:click="deletar_todas_as_tasks" id="btn_deletar_tasks" type="button" class="btn btn-danger">Deletar todas as tasks</button>
+  <form unicorn:submit.prevent.lazy="salvar_task" class="form-inline justify-content-center mx-3">
+    {% csrf_token %}
+      <input type="text" unicorn:model.defer="task" id="id_task_input" placeholder="New Task">
+      {% comment %} <p>form = {{form}}</p> {% endcomment %}
+      <button unicorn:click="salvar_task" class="btn btn-outline-success">Adicionar nova Task</button>
+  </form>
+
+    {% for task in tasks %}
+      <div class="card mb-1">
+        <div class="card-body row">
+          <div class="container">
+            <div class="row">
+              <p class="col-8">{{task.titulo}}</p>
+              <button id="editarTask{{task.id}}" data-toggle="collapse" data-target="#collapseExtendInformation{{task.id}}" aria-expanded="false" aria-controls="collapseExtendInformation{{task.id}}" class="btn btn-outline-warning">Editar Task id={{task.id}}</button>
+              <br>
+              <div class="collapse" id="collapseExtendInformation{{task.id}}">
+                <div class="card card-body">
+                  <form unicorn:submit.prevent="atualizar_task({{task.id}})" id="form_atualizar_task{{task.id}}" class="form-inline justify-content-center mx-3">
+                    {% csrf_token %}
+                    <input type="text" unicorn:model.lazy="task" id="id_task_input_atualizar{{task.id}}" placeholder="Atualizar Task">
+                    <button unicorn:click="atualizar_task({{ task.id }})" id="btn_task_atualizar{{task.id}}" class="btn btn-outline-info btn-sm">Novo Titulo da Task</button>
+                </form>
+                </div>
+              </div>
+              </p>
+              <button unicorn:click="deletar_task({{ task.id }})" id="deleteTask{{task.id}}" class="btn btn-outline-danger">Deletar Task id={{task.id}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    <script src="{% static 'js/script.js' %}"></script>
+</div>

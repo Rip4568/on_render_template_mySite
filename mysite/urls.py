@@ -7,4 +7,5 @@ urlpatterns = [
     #rotas para o aplicativo
     path('',include('render.urls')),
     #rotas para as dependencias
+    path('unicorn/',include('django_unicorn.urls'))
 ]

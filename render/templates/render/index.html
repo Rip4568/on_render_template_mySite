@@ -1,7 +1,9 @@
 {% load static %}
+{% load unicorn %}
 <!doctype html>
 <html lang="pt-br">
 <head>
+    {% script_unicorn %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,6 +16,7 @@
           crossorigin="anonymous">
 </head>
 <body>
+    {% csrf_token %}
     <header class="container mt-4 mb-4">
         <a href="https://render.com">
             <img src="{% static "images/render-banner.png" %}" alt="Render" class="mw-100">
@@ -24,6 +27,9 @@
             <div class="col">
                 <h1 class="display-4">Hello World!</h1>
             </div>
+        </div>
+        <div>
+            {% unicorn 'task-dynamic-v2' %}
         </div>
     </main>
 </body>

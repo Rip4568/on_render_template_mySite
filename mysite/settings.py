@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     #aplicativos instanciadas
     'render',
     #dependencias
+    'django_unicorn',
 ]
 
 MIDDLEWARE = [
