@@ -3,9 +3,9 @@ from pathlib import Path
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY",default="test1")
 
-DEBUG = os.getenv("DEBUG",default="False") == "True"
+DEBUG = os.getenv("DEBUG",default="True") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
